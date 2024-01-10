@@ -36,7 +36,41 @@
         </div>
     </div>
     
+<script>
 
+const apiKey = "874acd737ff057c2ff0eff177f0dc6c6"
+const apiURL = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=bangkok"
+
+const name = document.getElementsByClassName('city')
+console.log('name :', name)
+const checkWeather = async() =>{
+    try{
+        const response = await fetch(apiURL + `&appid=${apiKey}`);
+        if(!response.ok){
+            throw new Error('Could not fetch data')
+        }
+        let data = await response.json();
+        console.log('data',data)
+        console.log('temp :',data.main.temp)
+        console.log('city_name :',data.name)   
+        console.log('humidity :',data.main.humidity)
+        console.log('wind speed :',data.wind.speed)
+        // document.querySelector(".city").innerHTML = data.name;
+        document.getElementsByClassName('temp').innerHTML = data.main.temp;
+        // const name = document.getElementsByClassName('city')
+        // const temp  = document.getElementsByClassName('temp')
+        name.innerHTML = data.name
+        // temp.innerHTML = data.main.temp
+    } catch(error){
+        console.log('Error :', error)
+        alert('Data Loading Error (Fetch)')
+    }
+}
+checkWeather()
+
+
+
+</script>
 
 </body>
 
